@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Rich Marketing Agency</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+overflow-x:hidden;
+}
+
+/* Scroll Snap */
+section{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:40px;
+scroll-snap-align:start;
+position:relative;
+}
+
+html{
+scroll-snap-type:y mandatory;
+overflow-y:scroll;
+}
+
+/* Background Animation */
+body::before{
+content:"";
+position:fixed;
+width:200%;
+height:200%;
+background:radial-gradient(circle,#1e3a8a,#0f172a);
+animation:moveBg 10s linear infinite alternate;
+z-index:-1;
+}
+
+@keyframes moveBg{
+0%{transform:translate(-10%,-10%)}
+100%{transform:translate(10%,10%)}
+}
+
+/* Logo */
+.logo img{
+width:220px;
+margin-bottom:20px;
+animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+}
+
+/* Headings */
+h1{
+font-size:40px;
+margin-bottom:20px;
+background:linear-gradient(90deg,#facc15,#3b82f6);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+p{
+max-width:700px;
+line-height:1.6;
+color:#cbd5e1;
+}
+
+/* Services */
+.services{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+margin-top:30px;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+padding:20px;
+border-radius:15px;
+transition:0.4s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+background:linear-gradient(135deg,#3b82f6,#facc15);
+color:black;
+}
+
+/* Contact Buttons */
+.btn{
+display:inline-block;
+margin:10px;
+padding:12px 25px;
+border-radius:30px;
+background:linear-gradient(90deg,#facc15,#3b82f6);
+color:black;
+text-decoration:none;
+font-weight:600;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.1);
+}
+
+/* Review Section */
+.review-box{
+background:rgba(255,255,255,0.05);
+padding:20px;
+border-radius:15px;
+width:300px;
+margin:auto;
+}
+
+input,textarea{
+width:100%;
+padding:8px;
+margin:5px 0;
+border:none;
+border-radius:8px;
+}
+
+.star{
+font-size:22px;
+cursor:pointer;
+color:gray;
+}
+
+.star.active{
+color:gold;
+}
+
+.review-list{
+margin-top:20px;
+max-height:200px;
+overflow:auto;
+}
+
+.review-item{
+background:#1e293b;
+padding:10px;
+border-radius:8px;
+margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 HOME -->
+<section>
+<div class="logo">
+<img src="logo.png" alt="Prime Rich Logo">
+<h1>Grow Your Brand with Prime Rich Marketing Agency</h1>
+<p>We turn ideas into powerful digital success.</p>
+</div>
+</section>
+
+<!-- PAGE 2 ABOUT -->
+<section>
+<div>
+<h1>About Us</h1>
+<p>
+Prime Rich Marketing Agency is built with a vision to help brands grow digitally with powerful marketing strategies and creative solutions. We specialize in combining creativity with technology to deliver impactful results. Our mission is to help businesses scale faster using modern marketing tools, AI automation, and strategic branding.
+</p>
+</div>
+</section>
+
+<!-- PAGE 3 SERVICES -->
+<section>
+<div>
+<h1>Our Services</h1>
+<div class="services">
+<div class="card">Graphic Designing</div>
+<div class="card">Social Media Handling</div>
+<div class="card">AI Automations</div>
+<div class="card">Video / Reel Editing</div>
+<div class="card">Website Development</div>
+</div>
+</div>
+</section>
+
+<!-- PAGE 4 CONTACT -->
+<section>
+<div>
+<h1>Contact Us</h1>
+
+<p style="margin-top:25px;font-size:18px;">
+Mobile No: 9936588433
+</p>
+
+<p style="margin-top:10px;font-size:18px;">
+WhatsApp No: 9936588433
+</p>
+
+<p style="margin-top:10px;font-size:18px;">
+Email ID: anshugaur938@gmail.com
+</p>
+
+<p style="margin-top:10px;font-size:18px;">
+Instagram ID: prime_rich_marketing_agency_
+</p>
+
+</div>
+</section>
+
+<!-- PAGE 5 REVIEW -->
+<section>
+<div>
+<h1>Client Reviews</h1>
+
+<div class="review-box">
+<input type="text" id="name" placeholder="Your Name">
+<textarea id="review" placeholder="Your Review"></textarea>
+
+<div id="stars">
+<span class="star" data-value="1">★</span>
+<span class="star" data-value="2">★</span>
+<span class="star" data-value="3">★</span>
+<span class="star" data-value="4">★</span>
+<span class="star" data-value="5">★</span>
+</div>
+
+<button class="btn" onclick="submitReview()">Submit</button>
+
+<div class="review-list" id="reviewList"></div>
+</div>
+
+</div>
+</section>
+
+<script>
+let selectedRating=0;
+const stars=document.querySelectorAll(".star");
+
+stars.forEach(star=>{
+star.addEventListener("click",()=>{
+selectedRating=star.getAttribute("data-value");
+stars.forEach(s=>s.classList.remove("active"));
+for(let i=0;i<selectedRating;i++){
+stars[i].classList.add("active");
+}
+});
+});
+
+function submitReview(){
+let name=document.getElementById("name").value;
+let review=document.getElementById("review").value;
+
+if(name && review && selectedRating){
+let reviews=JSON.parse(localStorage.getItem("reviews"))||[];
+reviews.push({name,review,rating:selectedRating});
+localStorage.setItem("reviews",JSON.stringify(reviews));
+displayReviews();
+document.getElementById("name").value="";
+document.getElementById("review").value="";
+selectedRating=0;
+stars.forEach(s=>s.classList.remove("active"));
+}
+}
+
+function displayReviews(){
+let reviews=JSON.parse(localStorage.getItem("reviews"))||[];
+let reviewList=document.getElementById("reviewList");
+reviewList.innerHTML="";
+reviews.forEach(r=>{
+reviewList.innerHTML+=`
+<div class="review-item">
+<strong>${r.name}</strong><br>
+${"★".repeat(r.rating)}<br>
+${r.review}
+</div>`;
+});
+}
+
+displayReviews();
+</script>
+
+</body>
+</html>
